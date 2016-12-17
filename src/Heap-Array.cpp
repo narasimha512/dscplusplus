@@ -16,7 +16,7 @@ void Heap_Array::print_heap()
 {
 cout << "heap elements: " << endl;
 for(int i=0; i< length; i++) 
-cout << *(p+i) << " ";
+cout << p[i] << " ";
 cout << endl;
 }
 
@@ -28,9 +28,9 @@ if(pos <= 0)
 return;
 }
 int parent_index=get_parent_index(pos);
-if(*(p+pos) < *(p+parent_index))
+if(p[pos] < p[parent_index])
 {
-Util::swap(*(p+pos),*(p+parent_index));
+Util::swap(p[pos],p[parent_index]);
 } 
 else
 {
@@ -50,14 +50,14 @@ if(left_index+1>= length) //Leaf node
 return;
 }
 int small_index = right_index;
-if(*(p+left_index) < *(p+right_index))
+if(p[left_index] < p[right_index])
 {
  small_index=left_index;
 }
-if(*(p+small_index) < *(p+pos_index))
+if(p[small_index] < p[pos_index])
 {
-cout << "root is swapped with node " << *(p+small_index) << endl;
-swap(*(p+small_index), *(p+pos_index));
+cout << "root is swapped with node " << p[small_index] << endl;
+swap(p[small_index], p[pos_index]);
 down_heapify(small_index);
 }
 else
@@ -76,7 +76,7 @@ else
 {
 //re-size;
 }
-*(p+length)=value;
+p[length]=value;
 
 up_heapify(length++);
 cout << "push ";
@@ -86,8 +86,8 @@ print_heap();
 
 int Heap_Array::pop()
 {
-int retval = *(p+0);
-*(p+0)=*(p+length-1);
+int retval = p[0];
+p[0]=p[length-1];
 length--;
 down_heapify(0);
 cout << "pop ";
